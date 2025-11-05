@@ -19,7 +19,7 @@ a{
 }
 
 .app{
-  width: 80%;
+  width: 90%;
   margin: auto;
 }
 
@@ -30,5 +30,24 @@ a{
   }
   100% {
     opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .app {
+    width: 85%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .app {
+    width: 70%;
+    max-width: 1200px;
   }
 }

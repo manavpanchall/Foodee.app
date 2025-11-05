@@ -1,9 +1,12 @@
 .header{
-    height: 34vw;
-    margin: 30px auto;
-    background: url('/header_img.png') no-repeat;
-    background-size: contain;
+    height: 50vw;
+    max-height: 500px;
+    margin: 20px auto;
+    background: url('/header_img.png') no-repeat center;
+    background-size: cover;
     position: relative;
+    border-radius: 15px;
+    overflow: hidden;
 }
 
 .header-contents{
@@ -11,55 +14,114 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    gap: 1.5vw;
-    max-width: 50%;
-    bottom: 10%;
-    left: 6vw;
+    gap: 3vw;
+    max-width: 90%;
+    bottom: 8%;
+    left: 5%;
     animation: fadeIn 2s;
 }
-
 
 .header-contents h2{
     font-weight: 500;
     color: white;
-    font-size: max(4.5vw, 22px);
-
+    font-size: max(4vw, 18px);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
-
 
 .header-contents p{
     color: white;
-    font-size: 1vw;
+    font-size: max(2vw, 12px);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    line-height: 1.4;
 }
 
 .header-contents button{
     border: none;
     color: #747474;
     font-weight: 500;
-    padding: 1vw 2.3vw;
+    padding: 2vw 4vw;
     background-color: white;
-    font-size: max(1vw, 13px);
+    font-size: max(2vw, 12px);
     border-radius: 50px;
-    
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-@media (max-width: 1050px){
+.header-contents button:hover{
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .header{
+        height: 40vw;
+        max-height: 600px;
+        margin: 25px auto;
+    }
+    
+    .header-contents{
+        max-width: 70%;
+        left: 6%;
+        gap: 2vw;
+    }
+    
+    .header-contents h2{
+        font-size: max(3.5vw, 22px);
+    }
+    
+    .header-contents p{
+        font-size: max(1.5vw, 14px);
+    }
+    
+    .header-contents button{
+        padding: 1.5vw 3vw;
+        font-size: max(1.5vw, 14px);
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .header{
+        height: 34vw;
+        margin: 30px auto;
+    }
+    
+    .header-contents{
+        max-width: 50%;
+        left: 6vw;
+        gap: 1.5vw;
+        bottom: 10%;
+    }
+    
+    .header-contents h2{
+        font-size: max(4.5vw, 22px);
+    }
+    
+    .header-contents p{
+        font-size: 1vw;
+    }
+    
+    .header-contents button{
+        padding: 1vw 2.3vw;
+        font-size: max(1vw, 13px);
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1440px) {
     .header-contents{
         max-width: 45%;
-        
     }
 }
 
-
-@media (max-width: 750px){
-    .header-contents{
-        max-width: 55%;
-        
-    }
+/* Hide paragraph on very small screens */
+@media (max-width: 480px) {
     .header-contents p{
         display: none;
     }
+    
     .header-contents button{
-        padding: 2vw 4vw;
+        padding: 3vw 6vw;
     }
 }
