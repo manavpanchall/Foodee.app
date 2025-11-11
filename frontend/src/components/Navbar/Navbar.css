@@ -1,53 +1,94 @@
 .navbar{
-    padding: 15px 0px;
+    padding: 20px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    margin: 15px 0;
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    animation: slideUp 0.6s ease-out;
 }
 
 .navbar .logo{
-    width: 150px;
+    width: 160px;
+    transition: transform 0.3s ease;
+}
+
+.navbar .logo:hover{
+    transform: scale(1.05);
 }
 
 .navbar-menu{
     display: flex;
     list-style: none;
-    gap: 15px;
+    gap: 25px;
     color: #49557e;
-    font-size: 16px;
+    font-size: 17px;
     flex-wrap: wrap;
+    font-weight: 500;
 }
 
 .navbar-right{
     display: flex;
     align-items: center;
-    gap: 20px; 
+    gap: 25px; 
+}
+
+.navbar-right img{
+    transition: all 0.3s ease;
+    cursor: pointer;
+    padding: -70px;
+    border-radius: 10%;
+}
+
+.navbar-right img:hover{
+    transform: scale(1.1);
+    background: rgba(255, 99, 71, 0.1);
 }
 
 .navbar button{
     background: transparent;
-    font-size: 14px;
+    font-size: 16px;
     color: #49557e;
-    border: 1px solid tomato;
-    padding: 8px 20px;
+    border: 2px solid tomato;
+    padding: 10px 25px;
     border-radius: 50px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    font-weight: 600;
 }
 
 .navbar button:hover{
-    background-color: #fff4f2;
+    background: linear-gradient(135deg, #ff6b6b, #ffa726);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 99, 71, 0.3);
 }
 
 .navbar .active{
-    padding-bottom: 2px;
-    border-bottom: 2px solid #49557e; 
+    padding-bottom: 5px;
+    border-bottom: 3px solid tomato;
+    color: tomato;
+    font-weight: 600;
 }
 
 .navbar li{
     cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.navbar li:hover{
+    background: rgba(255, 99, 71, 0.1);
+    color: tomato;
+    transform: translateY(-2px);
 }
 
 .navbar-search-icon{
@@ -56,48 +97,118 @@
 
 .navbar-search-icon .dot{
     position: absolute;
-    min-width: 8px;
-    min-height: 8px;
-    background-color: tomato;
+    min-width: 10px;
+    min-height: 10px;
+    background: linear-gradient(135deg, #ff6b6b, #ffa726);
     border-radius: 50%;
-    top: -5px;
-    right: -5px;
+    top: -3px;
+    right: -3px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.navbar-profile{
+    position: relative;
+    cursor: pointer;
+}
+
+.nav-profile-dropdown{
+    position: absolute;
+    display: none;
+    right: 0;
+    z-index: 1000;
+    top: 100%;
+    background: white;
+    min-width: 180px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    border-radius: 12px;
+    padding: 15px 0;
+    border: 1px solid #f0f0f0;
+    animation: slideUp 0.2s ease;
+}
+
+.navbar-profile:hover .nav-profile-dropdown{
+    display: block;
+}
+
+.nav-profile-dropdown li{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+    margin: 0;
+    border-radius: 0;
+}
+
+.nav-profile-dropdown li img{
+    width: 22px;
+    padding: 0;
+}
+
+.nav-profile-dropdown li:hover{
+    background: linear-gradient(135deg, #ffece8, #fff0ed);
+    color: tomato;
+    transform: translateX(5px);
+}
+
+.nav-profile-dropdown hr{
+    margin: 8px 0;
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e2e2e2, transparent);
 }
 
 /* Tablet */
 @media (min-width: 768px) {
     .navbar{
-        padding: 20px 0px;
-        gap: 20px;
+        padding: 25px 0px;
+        gap: 25px;
+        margin: 20px 0;
     }
     
     .navbar .logo{
-        width: 160px;
+        width: 180px;
     }
     
     .navbar-menu{
-        gap: 20px;
-        font-size: 17px;
+        gap: 30px;
+        font-size: 18px;
     }
     
     .navbar-right{
-        gap: 30px; 
+        gap: 35px; 
     }
     
     .navbar-right img{
-        width: 22px;
+        width: 24px;
     }
     
     .navbar button{
-        padding: 10px 25px;
+        padding: 12px 30px;
         font-size: 16px;
     }
     
     .navbar-search-icon .dot{
-        min-width: 10px;
-        min-height: 10px;
-        top: -8px;
-        right: -8px;
+        min-width: 12px;
+        min-height: 12px;
+        top: -4px;
+        right: -4px;
     }
 }
 
@@ -106,15 +217,17 @@
     .navbar{
         flex-wrap: nowrap;
         gap: 0;
+        padding: 25px 30px;
     }
     
     .navbar .logo{
-        width: 190px;
+        width: 200px;
     }
     
     .navbar-menu{
-        gap: 20px;
+        gap: 35px;
         font-size: 18px;
+        margin: 0 auto;
     }
     
     .navbar-right{
@@ -122,7 +235,7 @@
     }
     
     .navbar button{
-        padding: 10px 30px;
+        padding: 12px 35px;
     }
 }
 
@@ -134,13 +247,14 @@
     
     .navbar{
         justify-content: space-between;
+        padding: 15px 20px;
     }
 }
 
 /* Small mobile */
 @media (max-width: 480px) {
     .navbar .logo{
-        width: 120px;
+        width: 130px;
     }
     
     .navbar-right{
@@ -148,11 +262,35 @@
     }
     
     .navbar-right img{
-        width: 18px;
+        width: 20px;
+        padding: -60px;
     }
     
     .navbar button{
-        padding: 6px 15px;
-        font-size: 12px;
+        padding: 8px 18px;
+        font-size: 14px;
+    }
+    
+    .nav-profile-dropdown{
+        min-width: 160px;
+        right: -10px;
+    }
+    
+    .nav-profile-dropdown li{
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    .navbar{
+        margin: 10px 0;
+        border-radius: 12px;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1440px) {
+    .navbar{
+        max-width: 1400px;
+        margin: 20px auto;
     }
 }

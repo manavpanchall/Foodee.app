@@ -1,0 +1,316 @@
+.add{
+    width: 90%;
+    margin: 40px auto;
+    margin-left: max(5vw,20px);
+    margin-top: 40px;
+    color: #4a4a4a;
+    font-size: 16px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.add form{
+    gap: 25px;
+    max-width: 600px;
+}
+
+.add-img-upload{
+    text-align: center;
+    padding: 30px;
+    border: 2px dashed #d0d0d0;
+    border-radius: 15px;
+    background: #fafafa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.add-img-upload:hover{
+    border-color: tomato;
+    background: #fff5f3;
+    transform: translateY(-2px);
+}
+
+.add-img-upload img{
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.add-img-upload:hover img{
+    transform: scale(1.05);
+}
+
+.add-img-upload p{
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #666;
+    font-size: 18px;
+}
+
+.add-product-name, .add-product-description{
+    width: 100%;
+}
+
+.add-product-name p, .add-product-description p{
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #444;
+    font-size: 16px;
+}
+
+.add-product-name input, .add-product-description textarea{
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: white;
+    width: 100%;
+}
+
+.add-product-name input:focus, .add-product-description textarea:focus{
+    border-color: tomato;
+    box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
+    outline: none;
+    transform: translateY(-2px);
+}
+
+.add-product-description textarea{
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+}
+
+/* Category and Food Type Layout */
+.add-category-type {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.add-category, .add-food-type, .add-price {
+    flex: 1;
+}
+
+.add-category p, .add-food-type p, .add-price p{
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #444;
+    font-size: 16px;
+}
+
+.add-category select, .add-price input{
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: white;
+    cursor: pointer;
+}
+
+.add-category select:focus, .add-price input:focus{
+    border-color: tomato;
+    box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
+    outline: none;
+    transform: translateY(-2px);
+}
+
+.new-category-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-top: 8px;
+    transition: all 0.3s ease;
+}
+
+.new-category-input:focus {
+    border-color: #667eea;
+    outline: none;
+}
+
+/* Food Type Options */
+.food-type-options {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.food-type-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+    flex: 1;
+    min-width: 100px;
+    justify-content: center;
+}
+
+.food-type-option:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+}
+
+.food-type-option.active {
+    border-color: #667eea;
+    background: #f0f4ff;
+    transform: translateY(-2px);
+}
+
+.food-type-option input[type="radio"] {
+    display: none;
+}
+
+.food-type-icon {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.food-type-option span:last-child {
+    font-weight: 600;
+    color: #2d2d2d;
+}
+
+.add-btn{
+    width: 100%;
+    max-width: 200px;
+    border: none;
+    padding: 16px 30px;
+    background: linear-gradient(135deg, #ff6b6b, #ffa726);
+    color: white;
+    cursor: pointer;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.add-btn:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+    background: linear-gradient(135deg, #ff5252, #ff9800);
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .add{
+        width: 75%;
+        margin-left: max(5vw,25px);
+        margin-top: 50px;
+    }
+    
+    .add form{
+        gap: 30px;
+    }
+    
+    .add-img-upload img{
+        width: 160px;
+        height: 160px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .add{
+        width: 70%;
+    }
+    
+    .add-img-upload img{
+        width: 180px;
+        height: 180px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .add{
+        width: 95%;
+        margin: 30px auto;
+        margin-left: auto;
+    }
+    
+    .add form{
+        gap: 20px;
+    }
+    
+    .add-img-upload{
+        padding: 20px;
+    }
+    
+    .add-img-upload img{
+        width: 120px;
+        height: 120px;
+    }
+    
+    .add-category-type {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .food-type-options {
+        gap: 10px;
+    }
+    
+    .food-type-option {
+        min-width: 80px;
+        padding: 10px 12px;
+    }
+    
+    .add-btn{
+        max-width: 100%;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .add{
+        margin: 20px auto;
+        font-size: 14px;
+    }
+    
+    .add-img-upload img{
+        width: 100px;
+        height: 100px;
+    }
+    
+    .add-product-name input, .add-product-description textarea,
+    .add-category select, .add-price input{
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    .food-type-option {
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+        min-width: 70px;
+        padding: 8px;
+    }
+    
+    .add-btn{
+        padding: 14px 25px;
+        font-size: 16px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -10,7 +10,7 @@
 
 body {
   min-height: 100vh;
-
+  background-color: #f8f9fa;
 }
 
 a{
@@ -19,10 +19,10 @@ a{
 }
 
 .app{
-  width: 90%;
+  width: 95%;
   margin: auto;
+  max-width: 1400px;
 }
-
 
 @keyframes fadeIn {
   0% {
@@ -33,21 +33,59 @@ a{
   }
 }
 
+@keyframes slideUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: tomato;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff7b5c;
+}
+
+/* Tablet */
 @media (min-width: 768px) {
+  .app {
+    width: 90%;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
   .app {
     width: 85%;
   }
 }
 
-@media (min-width: 1024px) {
-  .app {
-    width: 80%;
-  }
-}
-
+/* Large Desktop */
 @media (min-width: 1440px) {
   .app {
-    width: 70%;
-    max-width: 1200px;
+    width: 80%;
+    max-width: 1400px;
   }
 }

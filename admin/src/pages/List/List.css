@@ -1,0 +1,333 @@
+.list{
+    width: 90%;
+    margin: 40px auto;
+    margin-left: max(5vw,20px);
+    margin-top: 40px;
+    color: #4a4a4a;
+    font-size: 16px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.list p{
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #2d2d2d;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #f0f0f0;
+}
+
+.list-table{
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.list-table-format{
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 25px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.list-table-format:hover{
+    background-color: #f8f9fa;
+}
+
+.list-table-format.title{
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    border-bottom: none;
+}
+
+.list-table-format.title:hover{
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: none;
+}
+
+.list-table-format img{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.list-table-format:hover img{
+    border-color: tomato;
+    transform: scale(1.05);
+}
+
+.list-table-format p{
+    margin: 0;
+    color: #555;
+    font-weight: 500;
+    border: none;
+    background: none;
+    -webkit-text-fill-color: #555;
+    padding: 0;
+}
+
+/* Edit Form Styles */
+.edit-form {
+    display: contents;
+}
+
+.edit-form input,
+.edit-form textarea,
+.edit-form select {
+    padding: 8px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.edit-form input:focus,
+.edit-form textarea:focus,
+.edit-form select:focus {
+    border-color: tomato;
+    box-shadow: 0 0 0 2px rgba(255, 99, 71, 0.1);
+    outline: none;
+}
+
+.edit-form input {
+    grid-column: 2;
+}
+
+.edit-form textarea {
+    grid-column: 2;
+    resize: vertical;
+    min-height: 60px;
+    font-family: inherit;
+}
+
+.edit-form select {
+    grid-column: 3;
+}
+
+.edit-form input[type="number"] {
+    grid-column: 4;
+}
+
+.image-upload {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.image-upload label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+}
+
+.image-upload input {
+    font-size: 12px;
+}
+
+/* Action Buttons */
+.action-buttons {
+    grid-column: 5;
+    display: flex;
+    gap: 8px;
+}
+
+.edit-actions {
+    grid-column: 5;
+    display: flex;
+    gap: 8px;
+}
+
+.edit-btn, .delete-btn, .save-btn, .cancel-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.edit-btn {
+    background: #007bff;
+    color: white;
+}
+
+.edit-btn:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+}
+
+.save-btn {
+    background: #28a745;
+    color: white;
+}
+
+.save-btn:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+.cancel-btn {
+    background: #6c757d;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background: #545b62;
+    transform: translateY(-2px);
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .list{
+        width: 75%;
+        margin-left: max(5vw,25px);
+        margin-top: 50px;
+    }
+    
+    .list p{
+        font-size: 28px;
+    }
+    
+    .list-table-format{
+        padding: 20px 30px;
+        gap: 25px;
+    }
+    
+    .list-table-format img{
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .list{
+        width: 70%;
+    }
+    
+    .list-table-format{
+        grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr;
+        gap: 30px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .list{
+        width: 95%;
+        margin: 30px auto;
+        margin-left: auto;
+    }
+    
+    .list-table-format{
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 15px 20px;
+        text-align: center;
+    }
+    
+    .list-table-format.title{
+        display: none;
+    }
+    
+    .list-table-format img{
+        width: 80px;
+        height: 80px;
+        justify-self: center;
+    }
+    
+    .edit-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        grid-column: 1;
+    }
+    
+    .edit-form input,
+    .edit-form textarea,
+    .edit-form select {
+        grid-column: 1 !important;
+    }
+    
+    .image-upload {
+        grid-column: 1;
+    }
+    
+    .action-buttons,
+    .edit-actions {
+        grid-column: 1;
+        justify-content: center;
+    }
+    
+    .list p{
+        font-size: 22px;
+        text-align: center;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .list{
+        margin: 20px auto;
+        font-size: 14px;
+    }
+    
+    .list-table-format{
+        padding: 12px 15px;
+        gap: 12px;
+        font-size: 13px;
+    }
+    
+    .list-table-format img{
+        width: 60px;
+        height: 60px;
+    }
+    
+    .edit-btn, .delete-btn, .save-btn, .cancel-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+    
+    .list p{
+        font-size: 20px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

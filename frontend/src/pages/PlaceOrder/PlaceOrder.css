@@ -3,31 +3,41 @@
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    gap: 30px;
-    margin-top: 20px;
-    padding: 20px 0;
+    gap: 40px;
+    margin-top: 30px;
+    padding: 30px 0;
+    animation: fadeIn 0.8s ease-out;
 }
 
 .place-order-left{
     width: 100%;
-    max-width: 500px;
+    max-width: 550px;
 }
 
 .place-order-left .title{
     font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 30px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #2d2d2d;
     text-align: center;
 }
 
 .place-order-left input{
     margin-bottom: 15px;
     width: 100%;
-    padding: 12px;
-    border: 1px solid #c5c5c5;
-    border-radius: 4px;
-    outline-color: tomato;
-    font-size: 14px;
+    padding: 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.place-order-left input:focus{
+    border-color: tomato;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
 }
 
 .place-order-left .multi-fields{
@@ -38,21 +48,223 @@
 
 .place-order-right{
     width: 100%;
-    max-width: 500px;
+    max-width: 550px;
 }
 
 .place-order .cart-total{
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 2px solid #f8f9fa;
+}
+
+.place-order .cart-total h2{
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #2d2d2d;
+}
+
+.place-order .cart-total-details{
+    display: flex;
+    justify-content: space-between;
+    color: #555;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 0;
+}
+
+.place-order .cart-total-details:last-child{
+    font-weight: 700;
+    color: tomato;
+    font-size: 18px;
+    border-top: 2px solid #f0f0f0;
+    margin-top: 10px;
+    padding-top: 15px;
+}
+
+.place-order .cart-total hr{
+    margin: 12px 0px;
+    background: #e2e2e2;
+    border: none;
+    height: 1px;
 }
 
 .place-order .cart-total button{
-    margin-top: 20px;
+    margin-top: 25px;
     width: 100%;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ff6b6b, #ffa726);
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.place-order .cart-total button:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255,107,107,0.4);
+}
+
+/* Payment Method Styles */
+.payment-method {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #f0f0f0;
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 15px;
     padding: 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.payment-option:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+}
+
+.payment-option input[type="radio"] {
+    display: none;
+}
+
+.payment-option input[type="radio"]:checked + .checkmark {
+    border-color: #667eea;
+    background: #667eea;
+}
+
+.payment-option input[type="radio"]:checked + .checkmark::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.payment-info {
+    flex: 1;
+}
+
+.payment-name {
+    display: block;
+    font-weight: 600;
+    color: #2d2d2d;
+    margin-bottom: 4px;
+}
+
+.payment-desc {
+    display: block;
+    font-size: 14px;
+    color: #666;
+}
+
+/* COD Confirmation Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.cod-confirm-modal {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+
+.cod-confirm-modal h3 {
+    margin-bottom: 15px;
+    color: #2d2d2d;
+    font-size: 20px;
+}
+
+.cod-confirm-modal p {
+    margin-bottom: 10px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.order-amount {
+    font-size: 18px;
+    font-weight: 700;
+    color: tomato;
+    margin: 15px 0;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.confirm-btn, .cancel-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
     font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.confirm-btn {
+    background: #28a745;
+    color: white;
+}
+
+.confirm-btn:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+.cancel-btn {
+    background: #6c757d;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background: #545b62;
+    transform: translateY(-2px);
 }
 
 /* Tablet */
@@ -60,8 +272,8 @@
     .place-order{
         flex-direction: row;
         align-items: start;
-        gap: 40px;
-        margin-top: 30px;
+        gap: 50px;
+        margin-top: 40px;
     }
     
     .place-order-left{
@@ -69,7 +281,7 @@
     }
     
     .place-order-left .title{
-        font-size: 26px;
+        font-size: 28px;
         text-align: left;
     }
     
@@ -86,35 +298,37 @@
 /* Desktop */
 @media (min-width: 1024px) {
     .place-order{
-        gap: 50px;
+        gap: 60px;
         margin-top: 50px;
     }
     
     .place-order-left{
-        max-width: max(30%, 500px);
+        max-width: max(35%, 550px);
     }
     
     .place-order-left .title{
-        font-size: 30px;
-        margin-bottom: 50px;
-    }
-    
-    .place-order-left input{
-        padding: 10px;
+        font-size: 32px;
+        margin-bottom: 30px;
     }
     
     .place-order-right{
-        max-width: max(40%, 500px);
-    }
-    
-    .place-order .cart-total button{
-        margin-top: 30px;
+        max-width: max(45%, 550px);
     }
 }
 
-/* Large screens */
-@media (min-width: 1440px) {
+/* Mobile */
+@media (max-width: 767px) {
     .place-order{
-        justify-content: space-between;
+        margin-top: 20px;
+        padding: 20px 0;
+        gap: 30px;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+    
+    .payment-option {
+        padding: 12px;
     }
 }
