@@ -12,7 +12,7 @@ const Add = ({url}) => {
         description: "",
         price: "",
         category: "Salad",
-        foodType: "veg" // veg, non-veg, unsure
+        foodType: "veg" // veg, non-veg, jain
     })
     const [newCategory, setNewCategory] = useState("");
 
@@ -57,7 +57,7 @@ const Add = ({url}) => {
         switch(type) {
             case 'veg': return '#28a745';
             case 'non-veg': return '#dc3545';
-            case 'unsure': return '#ffc107';
+            case 'jain': return '#ffc107';
             default: return '#6c757d';
         }
     }
@@ -66,7 +66,7 @@ const Add = ({url}) => {
         switch(type) {
             case 'veg': return '🟢';
             case 'non-veg': return '🔴';
-            case 'unsure': return '🟡';
+            case 'jain': return '🟡';
             default: return '⚪';
         }
     }
@@ -151,18 +151,18 @@ const Add = ({url}) => {
                                 <span>Non-Veg</span>
                             </label>
                             
-                            <label className={`food-type-option ${data.foodType === 'unsure' ? 'active' : ''}`}>
+                            <label className={`food-type-option ${data.foodType === 'jain' ? 'active' : ''}`}>
                                 <input
                                     type="radio"
                                     name="foodType"
-                                    value="unsure"
-                                    checked={data.foodType === 'unsure'}
+                                    value="jain"
+                                    checked={data.foodType === 'jain'}
                                     onChange={onChangeHandler}
                                 />
-                                <span className="food-type-icon" style={{color: getFoodTypeColor('unsure')}}>
-                                    {getFoodTypeIcon('unsure')}
+                                <span className="food-type-icon" style={{color: getFoodTypeColor('jain')}}>
+                                    {getFoodTypeIcon('jain')}
                                 </span>
-                                <span>Not Sure</span>
+                                <span>Jain</span>
                             </label>
                         </div>
                     </div>

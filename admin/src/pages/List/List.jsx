@@ -109,7 +109,7 @@ const List = ({url}) => {
         switch(type) {
             case 'veg': return '🟢';
             case 'non-veg': return '🔴';
-            case 'unsure': return '🟡';
+            case 'jain': return '🟡';
             default: return '⚪';
         }
     }
@@ -118,7 +118,7 @@ const List = ({url}) => {
         switch(type) {
             case 'veg': return '#28a745';
             case 'non-veg': return '#dc3545';
-            case 'unsure': return '#ffc107';
+            case 'jain': return '#ffc107';
             default: return '#6c757d';
         }
     }
@@ -137,12 +137,12 @@ const List = ({url}) => {
                     <b>Type</b>
                     <b>Category</b>
                     <b>Price</b>
-                    <b>Actions</b>
+                    <b></b> {/* Empty header for actions column */}
                 </div>
                 {list.map((item,index)=>{
                     return (
                         <div key={index} className='list-table-format'>
-                            <img src={`${url}/images/`+item.image} alt='' />
+                            <img src={item.imageUrl} alt={item.name} />
                             
                             {editingItem === item._id ? (
                                 <>
@@ -186,16 +186,16 @@ const List = ({url}) => {
                                                     {getFoodTypeIcon('non-veg')}
                                                 </span>
                                             </label>
-                                            <label className={`food-type-option ${editForm.foodType === 'unsure' ? 'active' : ''}`}>
+                                            <label className={`food-type-option ${editForm.foodType === 'jain' ? 'active' : ''}`}>
                                                 <input
                                                     type="radio"
                                                     name="foodType"
-                                                    value="unsure"
-                                                    checked={editForm.foodType === 'unsure'}
+                                                    value="jain"
+                                                    checked={editForm.foodType === 'jain'}
                                                     onChange={handleEditChange}
                                                 />
-                                                <span className="food-type-icon" style={{color: getFoodTypeColor('unsure')}}>
-                                                    {getFoodTypeIcon('unsure')}
+                                                <span className="food-type-icon" style={{color: getFoodTypeColor('jain')}}>
+                                                    {getFoodTypeIcon('jain')}
                                                 </span>
                                             </label>
                                         </div>

@@ -22,6 +22,7 @@ const PlaceOrder = () => {
 
   const [paymentMethod, setPaymentMethod] = useState('online');
   const [showCodConfirm, setShowCodConfirm] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onChangeHandler = (event) => {
     const name = event.target.name;
@@ -40,9 +41,19 @@ const PlaceOrder = () => {
 
   const placeOrder = async (event) => {
     event.preventDefault();
+    setLoading(true);
+
+    // Validate form data
+    if (!data.firstName || !data.lastName || !data.email || !data.street || 
+        !data.city || !data.state || !data.zipcode || !data.country || !data.phone) {
+      alert("Please fill all the delivery information fields");
+      setLoading(false);
+      return;
+    }
 
     if (paymentMethod === 'cod') {
       setShowCodConfirm(true);
+      setLoading(false);
       return;
     }
 
@@ -50,45 +61,57 @@ const PlaceOrder = () => {
   }
 
   const processOrder = async () => {
-    let orderItems = [];
-    food_list.map((item) => {
-      if (cartItems[item._id] > 0) {
-        let itemInfo = item;
-        itemInfo["quantity"] = cartItems[item._id];
-        orderItems.push(itemInfo)
-      }
-    })
-
-    let orderData = {
-      address: data,
-      items: orderItems,
-      amount: getTotalCartAmount() + 80,
-      paymentMethod: paymentMethod
-    }
-
+    setLoading(true);
+    
     try {
+      let orderItems = [];
+      food_list.forEach((item) => {
+        if (cartItems[item._id] > 0) {
+          let itemInfo = { ...item };
+          itemInfo["quantity"] = cartItems[item._id];
+          orderItems.push(itemInfo)
+        }
+      })
+
+      let orderData = {
+        userId: JSON.parse(atob(token.split('.')[1])).id, // Extract user ID from token
+        items: orderItems,
+        amount: getTotalCartAmount() + 80,
+        address: data,
+        paymentMethod: paymentMethod
+      }
+
+      console.log("Sending order data:", orderData);
+
       if (paymentMethod === 'online') {
         // Online payment with Razorpay
-        let response = await axios.post(url + "/api/order/place", orderData, { headers: { token } });
+        let response = await axios.post(url + "/api/order/place", orderData, { 
+          headers: { token } 
+        });
+
+        console.log("Order response:", response.data);
 
         if (response.data.success) {
-          const { key, razorpayOrderId, orderId } = response.data;
+          const { key, razorpayOrderId, orderId, amount } = response.data;
 
           const options = {
             key: key,
-            amount: response.data.amount * 100,
+            amount: amount * 100, // Convert to paise
             currency: "INR",
             name: "Foodee",
-            description: "Food Payment",
+            description: "Food Order Payment",
             order_id: razorpayOrderId,
             handler: async function (paymentResponse) {
-              console.log("Payment successful, updating database...");
+              console.log("Payment successful:", paymentResponse);
               try {
-                await axios.post(url + "/api/order/verify", { success: "true", orderId });
+                await axios.post(url + "/api/order/verify", { 
+                  success: "true", 
+                  orderId: orderId 
+                });
                 alert("Payment Successful! Order placed.");
-                window.location.href = "/myorders";
+                navigate("/myorders");
               } catch (err) {
-                console.error("Error:", err);
+                console.error("Verification error:", err);
                 alert("Payment successful but verification failed.");
               }
             },
@@ -99,28 +122,47 @@ const PlaceOrder = () => {
             },
             theme: {
               color: "#F54748"
+            },
+            modal: {
+              ondismiss: function() {
+                setLoading(false);
+                alert("Payment cancelled by user");
+              }
             }
           };
 
           const rzp = new window.Razorpay(options);
           rzp.open();
+          rzp.on('payment.failed', function(response) {
+            console.error("Payment failed:", response.error);
+            alert("Payment failed: " + response.error.description);
+            setLoading(false);
+          });
         } else {
-          alert("Error placing order");
+          alert("Error placing order: " + response.data.message);
+          setLoading(false);
         }
       } else {
         // COD payment - place order directly
-        const response = await axios.post(url + "/api/order/place", orderData, { headers: { token } });
+        const response = await axios.post(url + "/api/order/place", orderData, { 
+          headers: { token } 
+        });
+        
+        console.log("COD Order response:", response.data);
         
         if (response.data.success) {
           alert("Order placed successfully with Cash on Delivery!");
-          window.location.href = "/myorders";
+          navigate("/myorders");
         } else {
-          alert("Error placing order");
+          alert("Error placing order: " + response.data.message);
+          setLoading(false);
         }
       }
     } catch (error) {
       console.error("Place order error:", error);
-      alert("Something went wrong while placing the order");
+      alert("Something went wrong while placing the order: " + 
+        (error.response?.data?.message || error.message));
+      setLoading(false);
     }
   }
 
@@ -200,8 +242,9 @@ const PlaceOrder = () => {
                 <p>₹{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 80}</p>
               </div>
             </div>
-            <button type='submit'>
-              {paymentMethod === 'online' ? 'Proceed to Payment' : 'Place Order (COD)'}
+            <button type='submit' disabled={loading}>
+              {loading ? 'Processing...' : 
+               paymentMethod === 'online' ? 'Proceed to Payment' : 'Place Order (COD)'}
             </button>
           </div>
         </div>
@@ -218,12 +261,14 @@ const PlaceOrder = () => {
               <button 
                 className="confirm-btn"
                 onClick={processOrder}
+                disabled={loading}
               >
-                Yes, Place Order
+                {loading ? 'Placing Order...' : 'Yes, Place Order'}
               </button>
               <button 
                 className="cancel-btn"
                 onClick={() => setShowCodConfirm(false)}
+                disabled={loading}
               >
                 Cancel
               </button>

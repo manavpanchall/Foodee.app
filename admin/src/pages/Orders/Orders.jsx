@@ -7,12 +7,12 @@ import axios from "axios";
 import { assets } from '../../assets/assets';
 
 
-const Orders = ({url}) => {
+const Orders = ({ url }) => {
 
-  const [orders,setOrders] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   const fetchAllOrders = async () => {
-    const response = await axios.get(url+"/api/order/list");
+    const response = await axios.get(url + "/api/order/list");
     if (response.data.success) {
       // Reverse the orders array to show latest first
       const reversedOrders = response.data.data.reverse();
@@ -24,21 +24,53 @@ const Orders = ({url}) => {
     }
   }
 
-  const statusHandler = async (event,orderId) => {
-    const response = await axios.post(url+"/api/order/status",{
+  const statusHandler = async (event, orderId) => {
+    const response = await axios.post(url + "/api/order/status", {
       orderId,
-      status:event.target.value
+      status: event.target.value
     })
     if (response.data.success) {
       await fetchAllOrders();
     }
   }
 
-  useEffect(()=> {
+  // Format date to DD-MMM-YYYY, hh:mm AM/PM (12-hour format) in IST
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    
+    // Convert to IST (UTC+5:30)
+    const istOffset = 5.5 * 60 * 60 * 1000; // 5.5 hours in milliseconds
+    const istDate = new Date(date.getTime() + istOffset);
+    
+    // Get IST components
+    const day = istDate.getUTCDate().toString().padStart(2, '0');
+    const month = istDate.toLocaleString('en-US', { month: 'short' });
+    const year = istDate.getUTCFullYear();
+    
+    // Get time in 12-hour format
+    let hours = istDate.getUTCHours();
+    const minutes = istDate.getUTCMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    
+    return `${day}-${month}-${year}, ${hours}:${minutes} ${ampm}`;
+  }
+
+  useEffect(() => {
     fetchAllOrders();
-  },[])
+  }, [])
 
   const getPaymentStatus = (payment, paymentMethod, status) => {
+    if (status === 'Cancelled') {
+      if (paymentMethod === 'cod') {
+        return 'COD Cancelled';
+      } else {
+        return 'Refunded';
+      }
+    }
+
     if (paymentMethod === 'cod') {
       if (status === 'Delivered') {
         return 'Paid (COD)';
@@ -53,6 +85,9 @@ const Orders = ({url}) => {
   }
 
   const getPaymentStatusClass = (payment, paymentMethod, status) => {
+    if (status === 'Cancelled') {
+      return 'cancelled';
+    }
     if (paymentMethod === 'cod') {
       return status === 'Delivered' ? 'paid' : 'pending';
     } else {
@@ -87,7 +122,7 @@ const Orders = ({url}) => {
           <span className="stat-label">Delivered</span>
         </div>
       </div>
-      
+
       <div className="order-list">
         {orders.map((order, index) => (
           <div key={index} className="order-item">
@@ -95,17 +130,12 @@ const Orders = ({url}) => {
               <div className="order-info">
                 <div className="order-number">Order #{orders.length - index}</div>
                 <div className="order-date">
-                  {new Date(order.date).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                  })}
+                  {formatDate(order.date)}
                 </div>
               </div>
               <div className="order-amount">₹{order.amount}</div>
             </div>
-            
+
             <div className="order-content">
               {/* Customer & Items Section */}
               <div className="order-main">
@@ -137,7 +167,7 @@ const Orders = ({url}) => {
                   <div className="items-scroll-container">
                     {order.items.map((item, itemIndex) => (
                       <div key={itemIndex} className="order-item-product">
-                        <img src={`${url}/images/`+item.image} alt={item.name} />
+                        <img src={item.imageUrl} alt={item.name} />
                         <div className="product-info">
                           <div className="product-name">{item.name}</div>
                           <div className="product-meta">
@@ -155,8 +185,8 @@ const Orders = ({url}) => {
               <div className="order-actions">
                 <div className="status-section">
                   <div className="section-title">Status</div>
-                  <select 
-                    onChange={(event)=>statusHandler(event,order._id)} 
+                  <select
+                    onChange={(event) => statusHandler(event, order._id)}
                     value={order.status}
                     className="status-select"
                   >
@@ -165,7 +195,7 @@ const Orders = ({url}) => {
                     <option value="Delivered">Delivered</option>
                   </select>
                 </div>
-                
+
                 <div className="payment-section">
                   <div className="section-title">Payment</div>
                   <div className={`payment-status ${getPaymentStatusClass(order.payment, order.paymentMethod, order.status)}`}>
