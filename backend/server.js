@@ -27,7 +27,20 @@ app.use("/api/order", orderRouter)
 app.use("/api/promo", promoRouter)
 
 app.get("/", (req, res) => {
-    res.send("API Working")
+    res.json({ 
+        success: true, 
+        message: "Food Delivery API is working!",
+        timestamp: new Date().toISOString()
+    })
+})
+
+// Health check endpoint
+app.get("/health", (req, res) => {
+    res.json({ 
+        success: true, 
+        message: "Server is healthy",
+        timestamp: new Date().toISOString()
+    })
 })
 
 // Error handling middleware
@@ -36,7 +49,7 @@ app.use((err, req, res, next) => {
     res.status(500).json({ 
         success: false, 
         message: "Something went wrong!",
-        error: process.env.NODE_ENV === 'production' ? {} : err.stack
+        error: process.env.NODE_ENV === 'production' ? {} : err.message
     });
 });
 
@@ -48,8 +61,11 @@ app.use((req, res) => {
     });
 });
 
-app.listen(port, () => {
-    console.log(`Server Started on http://localhost:${port}`)
-})
+// Only start server if not in Vercel
+if (process.env.NODE_ENV !== 'production' || process.env.VERCEL !== '1') {
+    app.listen(port, () => {
+        console.log(`Server Started on http://localhost:${port}`)
+    })
+}
 
 export default app;
