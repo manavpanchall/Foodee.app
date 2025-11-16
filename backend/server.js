@@ -3,69 +3,64 @@ import cors from 'cors';
 import { connectDB } from './config/db.js';
 import foodRouter from './routes/foodRoute.js';
 import userRouter from './routes/userRoute.js';
-import 'dotenv/config';
 import cartRouter from './routes/cartRoute.js';
 import orderRouter from './routes/orderRoute.js';
 import promoRouter from './routes/promoRoute.js';
 
-// app config
+// Initialize express app
 const app = express();
-const port = process.env.PORT || 4000;
 
-// middleware
-app.use(express.json());
+// Middleware
 app.use(cors());
+app.use(express.json());
 
-// DB connection
+// Database connection
 connectDB();
 
-// api endpoints
-app.use("/api/food", foodRouter)
-app.use("/api/user", userRouter)
-app.use("/api/cart", cartRouter)
-app.use("/api/order", orderRouter)
-app.use("/api/promo", promoRouter)
+// API Routes
+app.use("/api/food", foodRouter);
+app.use("/api/user", userRouter);
+app.use("/api/cart", cartRouter);
+app.use("/api/order", orderRouter);
+app.use("/api/promo", promoRouter);
 
+// Root endpoint
 app.get("/", (req, res) => {
-    res.json({ 
-        success: true, 
-        message: "Food Delivery API is working!",
-        timestamp: new Date().toISOString()
-    })
-})
+  res.json({ 
+    success: true, 
+    message: "🍔 Food Delivery API is running!",
+    version: "1.0.0",
+    timestamp: new Date().toISOString()
+  });
+});
 
 // Health check endpoint
 app.get("/health", (req, res) => {
-    res.json({ 
-        success: true, 
-        message: "Server is healthy",
-        timestamp: new Date().toISOString()
-    })
-})
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ 
-        success: false, 
-        message: "Something went wrong!",
-        error: process.env.NODE_ENV === 'production' ? {} : err.message
-    });
+  res.json({ 
+    success: true, 
+    message: "✅ Server is healthy",
+    database: "Connected",
+    timestamp: new Date().toISOString()
+  });
 });
 
-// 404 handler
+// 404 Handler
 app.use((req, res) => {
-    res.status(404).json({ 
-        success: false, 
-        message: "Route not found" 
-    });
+  res.status(404).json({ 
+    success: false, 
+    message: "❌ Route not found" 
+  });
 });
 
-// Only start server if not in Vercel
-if (process.env.NODE_ENV !== 'production' || process.env.VERCEL !== '1') {
-    app.listen(port, () => {
-        console.log(`Server Started on http://localhost:${port}`)
-    })
-}
+// Error Handler
+app.use((err, req, res, next) => {
+  console.error('Error:', err);
+  res.status(500).json({ 
+    success: false, 
+    message: "🚨 Internal server error",
+    error: process.env.NODE_ENV === 'production' ? {} : err.message
+  });
+});
 
+// Export the app for Vercel
 export default app;
