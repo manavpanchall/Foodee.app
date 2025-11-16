@@ -5,6 +5,8 @@
       "destination": "/index.html"
     }
   ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "env": {
     "VITE_API_URL": "your-backend-url",
     "VITE_LOCAL_API_URL": "http://localhost:4000",

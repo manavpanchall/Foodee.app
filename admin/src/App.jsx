@@ -14,7 +14,18 @@ const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [loading, setLoading] = useState(true)
 
-  const url = "http://localhost:4000"
+  // Dynamic URL configuration
+  const getBaseUrl = () => {
+    if (import.meta.env.PROD) {
+      return import.meta.env.VITE_API_URL || "http://localhost:4000";
+    }
+    return import.meta.env.VITE_LOCAL_API_URL || "http://localhost:4000";
+  };
+
+  const url = getBaseUrl();
+
+  console.log("Admin Panel URL:", url);
+  console.log("Environment:", import.meta.env.PROD ? "Production" : "Development");
 
   useEffect(() => {
     // Check if user is already authenticated
