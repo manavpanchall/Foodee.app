@@ -14,4 +14,8 @@ export const assets ={
     parcel_icon
 }
 
-export const url = 'http://localhost:4000'
+// Use environment variables for URLs
+const localUrl = import.meta.env.VITE_LOCAL_API_URL || "http://localhost:4000";
+const productionUrl = import.meta.env.VITE_API_URL;
+
+export const url = import.meta.env.PROD ? (productionUrl || localUrl) : localUrl;

@@ -1,8 +1,12 @@
-  {
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/"
-      }
-    ]
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "env": {
+    "VITE_API_URL": "your-backend-url",
+    "VITE_LOCAL_API_URL": "http://localhost:4000"
   }
+}

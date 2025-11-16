@@ -4,9 +4,23 @@ import axios from "axios";
 
 const StoreContextProvider = (props) => {
     const [cartItems, setCartItems] = useState({});
-    const url = "http://localhost:4000"
+    
+    // Use environment variables for URLs
+    const localUrl = import.meta.env.VITE_LOCAL_API_URL || "http://localhost:4000";
+    const productionUrl = import.meta.env.VITE_API_URL;
+    
+    // Determine which URL to use based on environment
+    const getBaseUrl = () => {
+        if (import.meta.env.PROD) {
+            return productionUrl || localUrl;
+        }
+        return localUrl;
+    };
+    
+    const url = getBaseUrl();
+    
     const [token, setToken] = useState("");
-    const [food_list, setFoodList] = useState([])
+    const [food_list, setFoodList] = useState([]);
 
     const addToCart = async (itemId) => {
         if (!cartItems[itemId]) {
@@ -40,13 +54,21 @@ const StoreContextProvider = (props) => {
     }
 
     const fetchFoodList = async () => {
-        const response = await axios.get(url + "/api/food/list");
-        setFoodList(response.data.data)
+        try {
+            const response = await axios.get(url + "/api/food/list");
+            setFoodList(response.data.data);
+        } catch (error) {
+            console.error("Error fetching food list:", error);
+        }
     }
 
     const loadCartData = async (token) => {
-        const response = await axios.post(url + "/api/cart/get", {}, { headers: { token } });
-        setCartItems(response.data.cartData);
+        try {
+            const response = await axios.post(url + "/api/cart/get", {}, { headers: { token } });
+            setCartItems(response.data.cartData);
+        } catch (error) {
+            console.error("Error loading cart data:", error);
+        }
     }
 
     useEffect(() => {
