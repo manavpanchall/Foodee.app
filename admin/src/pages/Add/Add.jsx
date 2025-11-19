@@ -4,7 +4,7 @@ import { assets } from '../../assets/assets';
 import axios from "axios";
 import { toast } from 'react-toastify';
 
-const Add = ({url}) => {
+const Add = ({ url }) => {
 
     const [image, setImage] = useState(false);
     const [data, setData] = useState({
@@ -24,10 +24,10 @@ const Add = ({url}) => {
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
-        
+
         // Use new category if provided
         const finalCategory = data.category === "new" ? newCategory : data.category;
-        
+
         const formData = new FormData();
         formData.append("name", data.name)
         formData.append("description", data.description)
@@ -35,7 +35,7 @@ const Add = ({url}) => {
         formData.append("category", finalCategory)
         formData.append("foodType", data.foodType)
         formData.append("image", image)
-        
+
         const response = await axios.post(`${url}/api/food/add`, formData);
         if (response.data.success) {
             setData({
@@ -54,7 +54,7 @@ const Add = ({url}) => {
     }
 
     const getFoodTypeColor = (type) => {
-        switch(type) {
+        switch (type) {
             case 'veg': return '#28a745';
             case 'non-veg': return '#dc3545';
             case 'jain': return '#ffc107';
@@ -63,7 +63,7 @@ const Add = ({url}) => {
     }
 
     const getFoodTypeIcon = (type) => {
-        switch(type) {
+        switch (type) {
             case 'veg': return '🟢';
             case 'non-veg': return '🔴';
             case 'jain': return '🟡';
@@ -89,7 +89,7 @@ const Add = ({url}) => {
                     <p>Product description</p>
                     <textarea onChange={onChangeHandler} value={data.description} name='description' rows="6" placeholder='Write content here' required></textarea>
                 </div>
-                
+
                 <div className="add-category-type">
                     <div className="add-category flex-col">
                         <p>Product category</p>
@@ -106,6 +106,23 @@ const Add = ({url}) => {
                             <option value="Curry">Curry</option>
                             <option value="Snacks">Snacks</option>
                             <option value="Beverages">Beverages</option>
+                            <option value="Kachori">Kachori</option>
+                            <option value="Samosa">Samosa</option>
+                            <option value="Poha">Poha</option>
+                            <option value="Paratha">Paratha</option>
+                            <option value="Dhokla">Dhokla</option>
+                            <option value="Tea">Tea</option>
+                            <option value="Idli">Idli</option>
+                            <option value="Biryani">Biryani</option>
+                            <option value="Dosa">Dosa</option>
+                            <option value="Vada">Vada</option>
+                            <option value="Chole Bhature">Chole Bhature</option>
+                            <option value="Lassi">Lassi</option>
+                            <option value="Pakoda">Pakoda</option>
+                            <option value="Khichdi">Khichdi</option>
+                            <option value="Coffee">Coffee</option>
+                            <option value="Juice">Juice</option>
+                            <option value="Poori">Poori</option>
                             <option value="new">+ Add New Category</option>
                         </select>
                         {data.category === "new" && (
@@ -119,7 +136,7 @@ const Add = ({url}) => {
                             />
                         )}
                     </div>
-                    
+
                     <div className="add-food-type flex-col">
                         <p>Food Type</p>
                         <div className="food-type-options">
@@ -131,12 +148,12 @@ const Add = ({url}) => {
                                     checked={data.foodType === 'veg'}
                                     onChange={onChangeHandler}
                                 />
-                                <span className="food-type-icon" style={{color: getFoodTypeColor('veg')}}>
+                                <span className="food-type-icon" style={{ color: getFoodTypeColor('veg') }}>
                                     {getFoodTypeIcon('veg')}
                                 </span>
                                 <span>Veg</span>
                             </label>
-                            
+
                             <label className={`food-type-option ${data.foodType === 'non-veg' ? 'active' : ''}`}>
                                 <input
                                     type="radio"
@@ -145,12 +162,12 @@ const Add = ({url}) => {
                                     checked={data.foodType === 'non-veg'}
                                     onChange={onChangeHandler}
                                 />
-                                <span className="food-type-icon" style={{color: getFoodTypeColor('non-veg')}}>
+                                <span className="food-type-icon" style={{ color: getFoodTypeColor('non-veg') }}>
                                     {getFoodTypeIcon('non-veg')}
                                 </span>
                                 <span>Non-Veg</span>
                             </label>
-                            
+
                             <label className={`food-type-option ${data.foodType === 'jain' ? 'active' : ''}`}>
                                 <input
                                     type="radio"
@@ -159,7 +176,7 @@ const Add = ({url}) => {
                                     checked={data.foodType === 'jain'}
                                     onChange={onChangeHandler}
                                 />
-                                <span className="food-type-icon" style={{color: getFoodTypeColor('jain')}}>
+                                <span className="food-type-icon" style={{ color: getFoodTypeColor('jain') }}>
                                     {getFoodTypeIcon('jain')}
                                 </span>
                                 <span>Jain</span>
@@ -167,12 +184,12 @@ const Add = ({url}) => {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="add-price flex-col">
                     <p>Product price</p>
                     <input onChange={onChangeHandler} value={data.price} type='Number' name='price' placeholder='₹20' />
                 </div>
-                
+
                 <button type='submit' className='add-btn'>ADD</button>
             </form>
         </div>

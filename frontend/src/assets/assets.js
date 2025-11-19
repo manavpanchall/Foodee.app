@@ -60,6 +60,27 @@ import bag_icon from './bag_icon.png'
 import logout_icon from './logout_icon.png'
 import parcel_icon from './parcel_icon.png'
 
+
+import kachori_img from '../Assets/kachori.jpg'
+import samosa_img from '../Assets/samosa.jpg'
+import poha_img from '../Assets/poha.png'
+import paratha_img from '../assets/paratha.jpg'
+import dhokla_img from '../Assets/dhokla.jpg'
+import tea_img from '../Assets/tea.jpg'
+import idli_img from '../Assets/idli.png'
+import biryani_img from '../Assets/biryani.jpg'
+import dosa_img from '../Assets/dosa.jpg'
+import vada_img from '../Assets/vada.jpg'
+import chole_bhature_img from '../Assets/chole_bhature.jpg'
+import lassi_img from '../Assets/lassi.jpg'
+import pakoda_img from '../Assets/pakoda.jpg'
+import khichdi_img from '../Assets/khichdi.jpg'
+import coffee_img from '../Assets/coffee.jpg'
+import juice_img from '../Assets/juice.jpg'
+import poori_img from '../Assets/poori.jpg'
+
+
+
 export const assets = {
     logo,
     basket_icon,
@@ -114,7 +135,76 @@ export const menu_list = [
     {
         menu_name: "Noodles",
         menu_image: menu_8
-    }]
+    },
+    {
+        menu_name: "Kachori",
+        menu_image: kachori_img
+    },
+    {
+        menu_name: "Samosa",
+        menu_image: samosa_img
+    },
+    {
+        menu_name: "Poha",
+        menu_image: poha_img
+    },
+    {
+        menu_name: "Paratha",
+        menu_image: paratha_img
+    },
+    {
+        menu_name: "Dhokla",
+        menu_image: dhokla_img
+    },
+    {
+        menu_name: "Tea",
+        menu_image: tea_img
+    },
+    {
+        menu_name: "Idli",
+        menu_image: idli_img
+    },
+    {
+        menu_name: "Biryani",
+        menu_image: biryani_img
+    },
+    {
+        menu_name: "Dosa",
+        menu_image: dosa_img
+    },
+    {
+        menu_name: "Vada",
+        menu_image: vada_img
+    },
+    {
+        menu_name: "Chole Bhature",
+        menu_image: chole_bhature_img
+    },
+    {
+        menu_name: "Lassi",
+        menu_image: lassi_img
+    },
+    {
+        menu_name: "Pakoda",
+        menu_image: pakoda_img
+    },
+    {
+        menu_name: "Khichdi",
+        menu_image: khichdi_img
+    },
+    {
+        menu_name: "Coffee",
+        menu_image: coffee_img
+    },
+    {
+        menu_name: "Juice",
+        menu_image: juice_img
+    },
+    {
+        menu_name: "Poori",
+        menu_image: poori_img
+    }
+]
 
 export const food_list = [
     {
