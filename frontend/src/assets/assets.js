@@ -12,6 +12,8 @@ import menu_7 from './menu_7.png'
 import menu_8 from './menu_8.png'
 
 // Fix these imports - use './' instead of '../Assets/'
+import pizza_img from './Pizza.jpg'
+import burger_img from './burger.jpg'
 import kachori_img from './kachori.jpg'
 import samosa_img from './samosa.jpg'
 import poha_img from './poha.png'
@@ -102,6 +104,14 @@ export const assets = {
 }
 
 export const menu_list = [
+    {
+        menu_name: "Pizza",
+        menu_image: pizza_img
+    },
+    {
+        menu_name: "burger",
+        menu_image: burger_img
+    },
     {
         menu_name: "Salad",
         menu_image: menu_1
