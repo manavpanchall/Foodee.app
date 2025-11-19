@@ -1,58 +1,63 @@
 .explore-menu{
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    padding: 30px 0;
+    gap: 20px;
+    padding: 20px 0;
     animation: slideUp 0.8s ease-out;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .explore-menu h1{
     color: #2d2d2d;
     font-weight: 700;
-    font-size: 28px;
+    font-size: clamp(24px, 5vw, 36px);
     text-align: center;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    margin-bottom: 10px;
 }
 
 .explore-menu-text{
-    max-width: 100%;
     color: #666;
-    font-size: 16px;
+    font-size: clamp(14px, 3vw, 16px);
     line-height: 1.6;
     text-align: center;
     margin: 0 auto;
     padding: 0 15px;
+    max-width: 800px;
 }
 
 .explore-menu-list{
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin: 25px 0px;
-    padding: 15px 10px;
+    margin: 20px 0;
+    width: 100%;
 }
 
 .menu-container{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     overflow-x: auto;
-    padding: 20px 10px;
+    padding: 15px 10px;
     scrollbar-width: thin;
     scrollbar-color: tomato #f1f1f1;
+    -webkit-overflow-scrolling: touch;
 }
 
 .menu-container::-webkit-scrollbar{
-    height: 8px;
+    height: 6px;
 }
 
 .menu-container::-webkit-scrollbar-track{
     background: #f1f1f1;
     border-radius: 10px;
-    margin: 0 20px;
+    margin: 0 10px;
 }
 
 .menu-container::-webkit-scrollbar-thumb{
@@ -68,26 +73,28 @@
 .menu-rows-wrapper{
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
     min-width: max-content;
-    padding: 0 10px;
+    padding: 0 5px;
 }
 
 .menu-row{
     display: flex;
-    gap: 25px;
+    gap: clamp(15px, 4vw, 25px);
     justify-content: flex-start;
+    flex-wrap: nowrap;
 }
 
 .explore-menu-list-item{
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 100px;
+    min-width: clamp(70px, 20vw, 120px);
     transition: all 0.3s ease;
-    padding: 10px;
+    padding: 8px;
     border-radius: 20px;
     flex-shrink: 0;
+    cursor: pointer;
 }
 
 .explore-menu-list-item:hover{
@@ -96,25 +103,28 @@
 }
 
 .explore-menu-list-item img{
-    width: 80px;
-    min-width: 80px;
-    height: 80px;
+    width: clamp(60px, 15vw, 100px);
+    height: clamp(60px, 15vw, 100px);
+    min-width: clamp(60px, 15vw, 100px);
     cursor: pointer;
     border-radius: 50%;
     transition: all 0.3s ease;
     object-fit: cover;
-    border: 3px solid transparent;
+    border: 2px solid transparent;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .explore-menu-list-item p{
-    margin-top: 12px;
+    margin-top: 8px;
     color: #555;
-    font-size: 15px;
+    font-size: clamp(12px, 3vw, 14px);
     cursor: pointer;
     text-align: center;
     font-weight: 600;
     transition: color 0.3s ease;
+    line-height: 1.2;
+    max-width: 100px;
+    word-wrap: break-word;
 }
 
 .explore-menu-list-item:hover p{
@@ -122,16 +132,18 @@
 }
 
 .explore-menu-list-item.active{
-    border: 3px solid tomato;
-    padding: 3px;
-    box-shadow: 0 0 20px rgba(255, 99, 71, 0.4);
+    border: 2px solid tomato;
+    padding: 6px;
+    box-shadow: 0 0 15px rgba(255, 99, 71, 0.3);
 }
 
 .explore-menu hr{
-    margin: 20px 0px;
+    margin: 20px auto;
     height: 2px;
     background: linear-gradient(90deg, transparent, tomato, transparent);
     border: none;
+    width: 80%;
+    max-width: 400px;
 }
 
 /* Navigation arrows */
@@ -140,21 +152,22 @@
     justify-content: center;
     gap: 15px;
     margin-top: 10px;
+    padding: 0 10px;
 }
 
 .nav-arrow{
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
-    width: 40px;
-    height: 40px;
+    width: clamp(35px, 10vw, 45px);
+    height: clamp(35px, 10vw, 45px);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 18px;
+    font-size: clamp(16px, 4vw, 20px);
     font-weight: bold;
     box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
@@ -164,101 +177,119 @@
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
-.nav-arrow:disabled{
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
+.nav-arrow:active{
+    transform: scale(0.95);
 }
 
-/* Tablet */
-@media (min-width: 768px) {
+/* Touch device improvements */
+@media (hover: none) {
+    .explore-menu-list-item:hover{
+        transform: none;
+        background: transparent;
+    }
+    
+    .explore-menu-list-item:active{
+        background: rgba(255, 99, 71, 0.1);
+        transform: scale(0.95);
+    }
+}
+
+/* Mobile Phones (320px - 767px) */
+@media (max-width: 767px) {
     .explore-menu{
-        gap: 30px;
-        padding: 40px 0;
-    }
-    
-    .explore-menu h1{
-        font-size: 32px;
-        text-align: left;
-        padding-left: 20px;
-    }
-    
-    .explore-menu-text{
-        max-width: 85%;
-        font-size: 17px;
-        text-align: left;
-        margin: 0;
-        padding-left: 20px;
+        gap: 15px;
+        padding: 15px 0;
     }
     
     .explore-menu-list{
-        padding: 20px;
+        margin: 15px 0;
+        gap: 10px;
     }
     
     .menu-container{
-        padding: 20px;
+        padding: 10px 5px;
+        gap: 10px;
     }
     
     .menu-rows-wrapper{
-        gap: 30px;
-        padding: 0 15px;
+        gap: 15px;
     }
     
     .menu-row{
-        gap: 30px;
-    }
-    
-    .explore-menu-list-item img{
-        width: 100px;
-        min-width: 100px;
-        height: 100px;
-    }
-    
-    .explore-menu-list-item p{
-        font-size: 16px;
-    }
-    
-    .nav-arrow{
-        width: 45px;
-        height: 45px;
-        font-size: 20px;
-    }
-}
-
-/* Desktop */
-@media (min-width: 1024px) {
-    .explore-menu-list-item img{
-        width: 120px;
-        min-width: 120px;
-        height: 120px;
-    }
-    
-    .menu-row{
-        gap: 40px;
+        gap: 12px;
     }
     
     .explore-menu-list-item{
-        min-width: 120px;
+        min-width: 65px;
+        padding: 6px;
     }
     
-    .menu-container::-webkit-scrollbar{
-        height: 10px;
+    .explore-menu-list-item img{
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+    }
+    
+    .explore-menu-list-item p{
+        font-size: 11px;
+        margin-top: 6px;
+        max-width: 70px;
+    }
+    
+    .nav-arrow{
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
     }
 }
 
-/* Large screens */
-@media (min-width: 1440px) {
-    .explore-menu-text{
-        max-width: 70%;
+/* Small Mobile Phones (under 320px) */
+@media (max-width: 320px) {
+    .explore-menu-list-item{
+        min-width: 55px;
+    }
+    
+    .explore-menu-list-item img{
+        width: 45px;
+        height: 45px;
+        min-width: 45px;
+    }
+    
+    .explore-menu-list-item p{
+        font-size: 10px;
+        max-width: 60px;
+    }
+    
+    .menu-row{
+        gap: 8px;
+    }
+}
+
+/* Tablets (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .explore-menu{
+        gap: 25px;
+        padding: 30px 20px;
     }
     
     .explore-menu h1{
-        font-size: 36px;
+        text-align: left;
     }
-}
-
-/* Mobile */
-@media (max-width: 767px) {
+    
+    .explore-menu-text{
+        text-align: left;
+        padding-left: 0;
+    }
+    
+    .menu-container{
+        padding: 20px 15px;
+    }
+    
+    .menu-rows-wrapper{
+        gap: 25px;
+        padding: 0 10px;
+    }
+    
     .menu-row{
         gap: 20px;
     }
@@ -268,12 +299,112 @@
     }
     
     .explore-menu-list-item img{
-        width: 70px;
-        min-width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
+        min-width: 80px;
     }
     
     .explore-menu-list-item p{
-        font-size: 14px;
+        font-size: 13px;
+    }
+}
+
+/* Desktop (1024px - 1439px) */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .explore-menu{
+        padding: 40px 30px;
+    }
+    
+    .menu-container{
+        padding: 20px;
+    }
+    
+    .menu-rows-wrapper{
+        gap: 30px;
+    }
+    
+    .menu-row{
+        gap: 25px;
+    }
+    
+    .explore-menu-list-item{
+        min-width: 100px;
+    }
+    
+    .explore-menu-list-item img{
+        width: 90px;
+        height: 90px;
+        min-width: 90px;
+    }
+}
+
+/* Large Desktop (1440px and above) */
+@media (min-width: 1440px) {
+    .explore-menu{
+        padding: 50px 40px;
+    }
+    
+    .menu-container{
+        padding: 25px;
+    }
+    
+    .menu-rows-wrapper{
+        gap: 35px;
+    }
+    
+    .menu-row{
+        gap: 30px;
+    }
+    
+    .explore-menu-list-item{
+        min-width: 120px;
+    }
+    
+    .explore-menu-list-item img{
+        width: 100px;
+        height: 100px;
+        min-width: 100px;
+    }
+    
+    .explore-menu-list-item p{
+        font-size: 15px;
+    }
+}
+
+/* Landscape mode for mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .explore-menu{
+        padding: 10px 0;
+    }
+    
+    .explore-menu-text{
+        display: none;
+    }
+    
+    .menu-container{
+        max-height: 150px;
+    }
+    
+    .menu-rows-wrapper{
+        gap: 10px;
+    }
+}
+
+/* High DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .explore-menu-list-item img{
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
