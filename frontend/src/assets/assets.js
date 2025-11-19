@@ -11,6 +11,25 @@ import menu_6 from './menu_6.png'
 import menu_7 from './menu_7.png'
 import menu_8 from './menu_8.png'
 
+// Fix these imports - use './' instead of '../Assets/'
+import kachori_img from './kachori.jpg'
+import samosa_img from './samosa.jpg'
+import poha_img from './poha.png'
+import paratha_img from './paratha.jpg'
+import dhokla_img from './dhokla.jpg'
+import tea_img from './tea.jpg'
+import idli_img from './idli.png'
+import biryani_img from './biryani.jpg'
+import dosa_img from './dosa.jpg'
+import vada_img from './vada.jpg'
+import chole_bhature_img from './chole_bhature.jpg'
+import lassi_img from './lassi.jpg'
+import pakoda_img from './pakoda.jpg'
+import khichdi_img from './khichdi.jpg'
+import coffee_img from './coffee.jpg'
+import juice_img from './juice.jpg'
+import poori_img from './poori.jpg'
+
 import food_1 from './food_1.png'
 import food_2 from './food_2.png'
 import food_3 from './food_3.png'
@@ -59,27 +78,6 @@ import profile_icon from './profile_icon.png'
 import bag_icon from './bag_icon.png'
 import logout_icon from './logout_icon.png'
 import parcel_icon from './parcel_icon.png'
-
-
-import kachori_img from '../Assets/kachori.jpg'
-import samosa_img from '../Assets/samosa.jpg'
-import poha_img from '../Assets/poha.png'
-import paratha_img from '../assets/paratha.jpg'
-import dhokla_img from '../Assets/dhokla.jpg'
-import tea_img from '../Assets/tea.jpg'
-import idli_img from '../Assets/idli.png'
-import biryani_img from '../Assets/biryani.jpg'
-import dosa_img from '../Assets/dosa.jpg'
-import vada_img from '../Assets/vada.jpg'
-import chole_bhature_img from '../Assets/chole_bhature.jpg'
-import lassi_img from '../Assets/lassi.jpg'
-import pakoda_img from '../Assets/pakoda.jpg'
-import khichdi_img from '../Assets/khichdi.jpg'
-import coffee_img from '../Assets/coffee.jpg'
-import juice_img from '../Assets/juice.jpg'
-import poori_img from '../Assets/poori.jpg'
-
-
 
 export const assets = {
     logo,
@@ -438,4 +436,3 @@ export const food_list = [
         category: "Noodles"
     }
 ]
-
