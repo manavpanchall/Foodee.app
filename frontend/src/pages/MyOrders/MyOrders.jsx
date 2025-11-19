@@ -8,6 +8,11 @@ const MyOrders = () => {
   const { url, token } = useContext(StoreContext);
   const [data, setData] = useState([]);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const fetchOrders = async () => {
     const response = await axios.post(url + "/api/order/userorders", {}, { headers: { token } });
     const reversedData = response.data.data.reverse();

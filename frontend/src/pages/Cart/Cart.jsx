@@ -13,6 +13,11 @@ const Cart = () => {
   const [promoInput, setPromoInput] = useState('');
   const [showPromoCodes, setShowPromoCodes] = useState(false);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Fetch available promo codes
   const fetchPromoCodes = async () => {
     try {
@@ -62,7 +67,7 @@ const Cart = () => {
     if (!appliedPromo) return 0;
 
     const subtotal = getTotalCartAmount();
-    
+
     if (appliedPromo.discountType === 'fixed') {
       return Math.min(appliedPromo.discountAmount, subtotal);
     } else {
@@ -117,15 +122,15 @@ const Cart = () => {
                   <p>{item.name}</p>
                   <p>₹{item.price}</p>
                   <div className="quantity-controls">
-                    <button 
-                      className="quantity-btn" 
+                    <button
+                      className="quantity-btn"
                       onClick={() => removeFromCart(item._id)}
                     >
                       -
                     </button>
                     <span className="quantity-display">{cartItems[item._id]}</span>
-                    <button 
-                      className="quantity-btn" 
+                    <button
+                      className="quantity-btn"
                       onClick={() => addToCart(item._id)}
                     >
                       +
@@ -135,7 +140,7 @@ const Cart = () => {
                   <p onClick={() => handleRemoveItem(item._id)} className='cross'>x</p>
                 </div>
                 <hr />
-                
+
                 {/* Remove Confirmation Modal */}
                 {showRemoveConfirm === item._id && (
                   <div className="modal-overlay">
@@ -143,13 +148,13 @@ const Cart = () => {
                       <h3>Remove Item</h3>
                       <p>Are you sure you want to remove "{item.name}" from your cart?</p>
                       <div className="modal-actions">
-                        <button 
+                        <button
                           className="confirm-btn"
                           onClick={() => confirmRemove(item._id)}
                         >
                           Yes, Remove
                         </button>
-                        <button 
+                        <button
                           className="cancel-btn"
                           onClick={cancelRemove}
                         >
@@ -177,7 +182,7 @@ const Cart = () => {
               <p>Delivery Fee</p>
               <p>₹{deliveryFee}</p>
             </div>
-            
+
             {/* Applied Promo Code */}
             {appliedPromo && (
               <>
@@ -191,43 +196,61 @@ const Cart = () => {
                 </div>
               </>
             )}
-            
+
             <hr />
             <div className="cart-total-details final-total">
               <p>Total</p>
               <p>₹{finalTotal}</p>
             </div>
           </div>
-          <button onClick={()=>navigate('/order')}>Proceed to Checkout</button>
+          <button onClick={() => navigate('/order')}>Proceed to Checkout</button>
         </div>
-        
+
         {/* Promo Code Section */}
         <div className="cart-promocode">
           <div>
             <p>If you have a promo code, Enter it here</p>
-            
+
             {/* Available Promo Codes */}
             <div className="available-promo-codes">
-              <button 
+              <button
                 className="show-promo-btn"
                 onClick={() => setShowPromoCodes(!showPromoCodes)}
               >
                 {showPromoCodes ? 'Hide Available Codes' : 'Show Available Codes'}
               </button>
-              
+
               {showPromoCodes && (
                 <div className="promo-codes-list">
                   <h4>Available Promo Codes:</h4>
                   {promoCodes.filter(promo => new Date(promo.validUntil) > new Date()).map((promo) => (
-                    <div key={promo._id} className="promo-code-item">
+                    <div
+                      key={promo._id}
+                      className="promo-code-item"
+                      onClick={() => {
+                        setPromoInput(promo.code);
+                        setShowPromoCodes(false);
+                      }}
+                    >
                       <span className="promo-code-text">{promo.code}</span>
                       <span className="promo-discount">
-                        {promo.discountType === 'fixed' 
-                          ? `₹${promo.discountAmount} OFF` 
+                        {promo.discountType === 'fixed'
+                          ? `₹${promo.discountAmount} OFF`
                           : `${promo.discountAmount}% OFF`
                         }
                         {promo.minOrderAmount > 0 && ` on orders above ₹${promo.minOrderAmount}`}
                       </span>
+                      <button
+                        className="apply-now-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setPromoInput(promo.code);
+                          applyPromoCode();
+                          setShowPromoCodes(false);
+                        }}
+                      >
+                        Apply Now
+                      </button>
                     </div>
                   ))}
                   {promoCodes.filter(promo => new Date(promo.validUntil) > new Date()).length === 0 && (
@@ -238,9 +261,9 @@ const Cart = () => {
             </div>
 
             <div className="cart-promocode-input">
-              <input 
-                type='text' 
-                placeholder='Enter promo code' 
+              <input
+                type='text'
+                placeholder='Enter promo code'
                 value={promoInput}
                 onChange={(e) => setPromoInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && applyPromoCode()}
