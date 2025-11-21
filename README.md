@@ -6,7 +6,7 @@ backend API.
 
 ## 🚀 Live Demo
 
-Frontend: \[https://foodee-pied.vercel.app/\]\
+Frontend: https://foodee-pied.vercel.app/
 
 
 ## ✨ Features
@@ -122,7 +122,9 @@ POST /api/promo/validate
 ## 👨‍💻 Developer
 
 Manav Panchal : (https://manavpanchall-portfolio.vercel.app)
+
 GitHub: [@manavpanchal\](https://github.com/manavpanchall)
+
 LinkedIn: (https://www.linkedin.com/in/manavpanchall)
 
 ## ⭐ Quick Start
